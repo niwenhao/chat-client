@@ -1,0 +1,8 @@
+<div class="talking">
+    <div *ngFor="let talking of talkingHistories">{{talking.role}} : {{talking.text}}</div>
+</div>
+
+<div class="input">
+    <textarea [(ngModel)]="inputText" (keyup.enter)="sendText()"></textarea>
+    <button (click)="sendText()">Send</button>
+</div>

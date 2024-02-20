@@ -1,0 +1,11 @@
+<div class="newsession">
+    <textarea #prompt></textarea>
+    <button (click)="newChatSession">セッションを新規
+    </button>
+</div>
+<ul>
+    <li *ngFor="let session of sessions" 
+        (click)="chatSessionSelected(session)">
+        {{session.name}}
+    </li>
+</ul>
