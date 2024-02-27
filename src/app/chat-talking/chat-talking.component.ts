@@ -18,6 +18,8 @@ export class ChatTalkingComponent implements OnInit {
 
   inputText: string = "";
 
+  role: string = "user";
+
   async ngOnInit() {
     if (this.session) {
       this.talkingHistories = await this.session.listTalkingHistories();

@@ -3,6 +3,10 @@
 </div>
 
 <div class="input">
+    <select [(ngModel)]="role">
+        <option value="user" [defaultSelected]="true">User</option>
+        <option value="system">system</option>
+    </select>
     <textarea [(ngModel)]="inputText" (keyup.enter)="sendText()"></textarea>
     <button (click)="sendText()">Send</button>
 </div>
