@@ -50,7 +50,21 @@ export class ChatSession {
     }
   }
 
-  async addTalkingHistory(role: string, text: string) {
+  async addTalkingHistory(role: string, text: string): Promise<TalkingHistory[]> {
+    const response = await fetch(`/service/users/${this.userId}/sessions/${this.id}/talking_histories`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ role: role, message: text })
+    });
+
+    if (response.ok) {
+      const talkingHistories = await response.json();
+      return talkingHistories.map((t: any) => new TalkingHistory(t.id, t.role, t.message, t.timestamp));
+    } else {
+      throw new Error('Failed to add talking history');
+    }
   }
 }
 

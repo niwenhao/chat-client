@@ -31,22 +31,13 @@ export class ChatTalkingComponent {
       this.talkingHistories = histories;
     });
   }
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log("ChatTalkingComponent.ngOnChanges");
-  //   if (changes['chatSession']) {
-  //       this.chatSession?.listTalkingHistories().then(histories => {
-  //         this.talkingHistories = histories;
-  //       });
-  //   }
-  // }
 
   sendText() {
     console.log("ChatTalkingComponent.sendText");
-    if (this.chatSession) {
-      this.chatSession?.addTalkingHistory(this.role, this.inputText).then(() => {
-        this.chatSession?.listTalkingHistories().then(histories => {
-          this.talkingHistories = histories;
-        });
+    if (this.session) {
+      this.session?.addTalkingHistory(this.role, this.inputText).then(histories => {
+        this.talkingHistories = histories;
+        this.inputText = "";
       });
     }
   }
