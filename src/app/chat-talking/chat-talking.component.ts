@@ -41,8 +41,9 @@ export class ChatTalkingComponent {
   // }
 
   sendText() {
+    console.log("ChatTalkingComponent.sendText");
     if (this.chatSession) {
-      this.chatSession?.addTalkingHistory("user", this.inputText).then(() => {
+      this.chatSession?.addTalkingHistory(this.role, this.inputText).then(() => {
         this.chatSession?.listTalkingHistories().then(histories => {
           this.talkingHistories = histories;
         });
