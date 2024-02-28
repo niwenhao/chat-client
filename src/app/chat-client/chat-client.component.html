@@ -1,9 +1,9 @@
 <div>
     <div class="session">
-        <chat-sessions (sessionSelected)="sessionSelected"></chat-sessions>
+        <chat-sessions (sessionSelected)="sessionSelected" [userId]="userId"></chat-sessions>
     </div>
     <div class="talking">
-        <chat-talking [session]="session"></chat-talking>
+        <chat-talking [chatSession]="session"></chat-talking>
     </div>
 
 </div>

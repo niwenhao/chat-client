@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ChatSession, TalkingHistory } from '../chat-session.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,30 +10,42 @@ import { CommonModule } from '@angular/common';
   templateUrl: './chat-talking.component.html',
   styleUrl: './chat-talking.component.scss'
 })
-export class ChatTalkingComponent implements OnInit {
-  @Input() session: ChatSession | undefined;
+export class ChatTalkingComponent {
+  //@Input() chatSession = undefined as ChatSession | undefined;
 
   talkingHistories: TalkingHistory[] = [];
-
   inputText: string = "";
-
   role: string = "user";
 
-  async ngOnInit() {
-    if (this.session) {
-      this.talkingHistories = await this.session.listTalkingHistories();
-    }
+  session: ChatSession | undefined;
+
+  @Input() set chatSession(session: ChatSession | undefined) {
+    console.log("ChatTalkingComponent.set chatSession");
+    this.session = session
   }
 
+  updateTalkingHistories() {
+    console.log("ChatTalkingComponent.updateTalkingHistories");
+    this.chatSession?.listTalkingHistories().then(histories => {
+      this.talkingHistories = histories;
+    });
+  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log("ChatTalkingComponent.ngOnChanges");
+  //   if (changes['chatSession']) {
+  //       this.chatSession?.listTalkingHistories().then(histories => {
+  //         this.talkingHistories = histories;
+  //       });
+  //   }
+  // }
+
   sendText() {
-    if (this.session) {
-      this.session.addTalkingHistory("user", this.inputText).then(
-        () => {
-          this.session!.listTalkingHistories().then(histories => {
-            this.talkingHistories = histories;
-          });
-        }
-      );
+    if (this.chatSession) {
+      this.chatSession?.addTalkingHistory("user", this.inputText).then(() => {
+        this.chatSession?.listTalkingHistories().then(histories => {
+          this.talkingHistories = histories;
+        });
+      });
     }
   }
 }

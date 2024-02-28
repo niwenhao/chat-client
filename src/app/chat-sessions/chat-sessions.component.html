@@ -1,6 +1,6 @@
 <div class="newsession">
-    <textarea #prompt></textarea>
-    <button (click)="newChatSession">セッションを新規
+    <input type="text" #sessionName />
+    <button (click)="newChatSession(sessionName.value)">セッションを新規
     </button>
 </div>
 <ul>

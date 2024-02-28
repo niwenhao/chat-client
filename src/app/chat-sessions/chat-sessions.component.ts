@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject, OnInit, Input } from '@angular/core';
 import { ChatSession, ChatSessionService } from '../chat-session.service';
 import { CommonModule } from '@angular/common';
 
@@ -9,22 +9,27 @@ import { CommonModule } from '@angular/common';
   templateUrl: './chat-sessions.component.html',
   styleUrl: './chat-sessions.component.scss'
 })
-export class ChatSessionsComponent {
+export class ChatSessionsComponent implements OnInit {
   @Output() sessionSelected = new EventEmitter();
+
+  @Input() userId: string | undefined;
 
   chatSessionService = inject(ChatSessionService);
 
   sessions: ChatSession[] = [];
 
-  async ngOnInit() {
-    this.sessions = await this.chatSessionService.listSessions();
+  ngOnInit() {
+    console.log("ChatSessionsComponent.ngOnInit");
+    this.chatSessionService.listSessions(this.userId!).then(sessions => {
+      this.sessions = sessions;
+    });
   }
 
-  newChatSession() {
-    this.chatSessionService.createSession(prompt.toString(), "newSession").then(
+  newChatSession(sessionName: string) {
+    this.chatSessionService.createSession(this.userId!, sessionName).then(
       (session) => {
         this.sessionSelected.emit(session);
-        this.chatSessionService.listSessions().then(sessions => {
+        this.chatSessionService.listSessions(this.userId!).then(sessions => {
           this.sessions = sessions;
         });
       }
@@ -32,6 +37,7 @@ export class ChatSessionsComponent {
   }
 
   chatSessionSelected(session: ChatSession) {
+    console.log("chatSessionSelected: ", session);
     this.sessionSelected.emit(session);
   }
 

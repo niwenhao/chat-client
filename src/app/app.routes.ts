@@ -4,5 +4,5 @@ import { ChatClientComponent } from './chat-client/chat-client.component';
 
 export const routes: Routes = [
     {path: '', component: LogonComponent },
-    {path: 'chat', component: ChatClientComponent}
+    {path: 'chat/:userId', component: ChatClientComponent}
 ];

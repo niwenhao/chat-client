@@ -39,10 +39,10 @@ export class LogonComponent {
 
     constructor() { }
 
-  onSubmit() {
-    const logonResult = this.userLoginService.logon(this.loginInput.value.user_id, this.loginInput.value.password);
+  async onSubmit() {
+    const logonResult = await this.userLoginService.logon(this.loginInput.value.user_id, this.loginInput.value.password);
     if (logonResult) {
-      this.router.navigate(['/chat']);
+      this.router.navigate(['/chat', logonResult.user_id]);
     } else {
       this.errorMessage = "Logon failed";
     } 
