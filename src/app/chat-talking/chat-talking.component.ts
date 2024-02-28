@@ -21,12 +21,13 @@ export class ChatTalkingComponent {
 
   @Input() set chatSession(session: ChatSession | undefined) {
     console.log("ChatTalkingComponent.set chatSession");
-    this.session = session
+    this.session = session;
+    this.updateTalkingHistories();
   }
 
   updateTalkingHistories() {
     console.log("ChatTalkingComponent.updateTalkingHistories");
-    this.chatSession?.listTalkingHistories().then(histories => {
+    this.session?.listTalkingHistories().then(histories => {
       this.talkingHistories = histories;
     });
   }

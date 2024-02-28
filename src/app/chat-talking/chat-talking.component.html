@@ -1,13 +1,13 @@
 <div class="talking">
     <div>session : {{session?.name}}</div>
-    <!-- <div *ngFor="let talking of talkingHistories">{{talking.role}} : {{talking.text}}</div> -->
+    <div *ngFor="let talking of talkingHistories">({{talking.timestamp}}) {{talking.role}} : {{talking.text}}</div>
 </div>
 
-<!-- <div class="input">
+<div class="input">
     <select [(ngModel)]="role">
         <option value="user" [defaultSelected]="true">User</option>
-        <option value="system">system</option>
+        <option value="system">System</option>
     </select>
     <textarea [(ngModel)]="inputText" (keyup.enter)="sendText()"></textarea>
     <button (click)="sendText">Send</button>
-</div> -->
+</div>

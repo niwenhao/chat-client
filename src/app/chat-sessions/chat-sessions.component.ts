@@ -37,7 +37,7 @@ export class ChatSessionsComponent implements OnInit {
   }
 
   chatSessionSelected(session: ChatSession) {
-    console.log("chatSessionSelected: ", session);
+    console.log("chat-sessions.chatSessionSelected: ", session);
     this.sessionSelected.emit(session);
   }
 

@@ -1,6 +1,6 @@
 <div>
     <div class="session">
-        <chat-sessions (sessionSelected)="sessionSelected" [userId]="userId"></chat-sessions>
+        <chat-sessions (sessionSelected)="sessionSelected($event)" [userId]="userId"></chat-sessions>
     </div>
     <div class="talking">
         <chat-talking [chatSession]="session"></chat-talking>

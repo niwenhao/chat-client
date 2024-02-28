@@ -44,7 +44,7 @@ export class ChatSession {
     const response = await fetch('/service/users/' + this.userId + '/sessions/' + this.id + '/talking_histories');
     if (response.ok) {
       const talkingHistories = await response.json();
-      return talkingHistories.map((t: any) => new TalkingHistory(t.id, t.role, t.text, t.timestamp));
+      return talkingHistories.map((t: any) => new TalkingHistory(t.id, t.role, t.message, t.timestamp));
     } else {
       throw new Error('Failed to list talking histories');
     }
