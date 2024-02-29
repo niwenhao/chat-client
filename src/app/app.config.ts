@@ -5,7 +5,9 @@ import { routes } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { provideMarkdown } from 'ngx-markdown';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes)]
+  providers: [provideRouter(routes),
+  provideMarkdown()]
 };

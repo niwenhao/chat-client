@@ -2,7 +2,7 @@
 session : {{session?.name}}
 </div>
 <div class="history">
-    <div *ngFor="let talking of talkingHistories">({{talking.timestamp}}) {{talking.role}}</div>
+    <div *ngFor="let talking of talkingHistories">({{talking.timestamp}}) {{talking.role}}<markdown [data]="talking.text"></markdown></div>
 </div>
 
 <div class="talking">

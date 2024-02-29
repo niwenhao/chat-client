@@ -2,11 +2,12 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ChatSession, TalkingHistory } from '../chat-session.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   selector: 'chat-talking',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MarkdownComponent],
   templateUrl: './chat-talking.component.html',
   styleUrl: './chat-talking.component.scss'
 })
