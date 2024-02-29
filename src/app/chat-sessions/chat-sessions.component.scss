@@ -9,6 +9,23 @@
     display: flex-box;
     text-align: right;
 
+    input {
+        width: 180px;
+        height: 30px;
+    }
+    button {
+        width: 150px;
+        height: 50px;
+        margin: 5px;
+        border: none;
+        background-color: #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+        text-shadow: 1px 1px 1px black;
+    }
+
 }
 
 ul {

@@ -1,9 +1,11 @@
-<div class="talking">
-    <div>session : {{session?.name}}</div>
-    <div *ngFor="let talking of talkingHistories">({{talking.timestamp}}) {{talking.role}} : {{talking.text}}</div>
+<div class="head">
+session : {{session?.name}}
+</div>
+<div class="history">
+    <div *ngFor="let talking of talkingHistories">({{talking.timestamp}}) {{talking.role}}</div>
 </div>
 
-<div class="input">
+<div class="talking">
     <select [(ngModel)]="role">
         <option value="user" [defaultSelected]="true">User</option>
         <option value="system">System</option>
