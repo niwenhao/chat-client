@@ -1,11 +1,18 @@
 div {
+    div {
+        display: flex;
+    }
+
     .session {
-        float: left;
-        width: 5cm;
+        width: 200px;
+        overflow: auto;
+        position: fixed;
+        left: 0;
     }
 
     .talking {
-        float: right;
-        width: fit-content
+        flex: 1;
+        overflow: auto;
+        margin-left: 220px; // Add this line to move .talking to the right side
     }
 }

@@ -1,12 +1,24 @@
 /* SCSS */
 form {
+    text-align: center;
     margin: 2cm;
+    width: 400px;
+    
     div {
-        text-align: center;
         margin: 0.5cm;
+        
         label {
             display: inline-block;
             width: 5cm;
         }
+        
+        input {
+            height: 30px;
+        }
+    }
+    
+    button {
+        width: 200px;
+        height: 50px;
     }
 }
