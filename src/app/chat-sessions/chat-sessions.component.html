@@ -1,7 +1,5 @@
 <div class="newsession">
-    <input type="text" #sessionName />
-    <button (click)="newChatSession(sessionName.value)">セッションを新規
-    </button>
+    <app-session-editor (saveSession)="saveChatSession($event)"></app-session-editor>
 </div>
 <ul>
     <li *ngFor="let session of sessions" 

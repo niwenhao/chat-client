@@ -1,0 +1,12 @@
+<div>
+<label>Model</label>
+<select [(ngModel)]="model">
+    <option value="gpt-3.5-turbo" [defaultSelected]="true">gpt-3.5-turbo</option>
+    <option value="gpt-4">gpt-4</option>
+</select>
+</div>
+<div>
+<label>Name</label>
+<input [(ngModel)]="name" />
+</div>
+<button (click)="saveSession()">Create</button>

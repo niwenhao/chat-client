@@ -12,33 +12,58 @@ export class ChatSessionService {
     
     if (response.ok) {
       const sessions = await response.json();
-      return sessions.map((s: any) => new ChatSession(s.id, userId, s.name));
+      return sessions.map((s: any) => new ChatSession(s.id, userId, s.model, s.name));
     } else {
       throw new Error('Failed to list sessions');
     }
   }
 
-  async createSession(userId: string, name: string): Promise<ChatSession> {
+  async createSession(userId: string, model: string, name: string): Promise<ChatSession> {
     const response = await fetch('/service/users/' + userId + '/sessions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({name: name})
+      body: JSON.stringify({model: model, name: name})
     });
     if (response.ok) {
       const session = await response.json();
 
-      return new ChatSession(session.id, userId, session.name);
+      return new ChatSession(session.id, userId, session.model, session.name);
     } else {
       throw new Error('Failed to create session');
+    }
+  }
+
+  async updateSession(userId: string, sessionId: number, model: string, name: string): Promise<ChatSession> {
+    const response = await fetch(`/service/users/${userId}/sessions/${sessionId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ model: model, name: name })
+    });
+    if (response.ok) {
+      const session = await response.json();
+      return new ChatSession(session.id, userId, session.model, session.name);
+    } else {
+      throw new Error('Failed to update session');
+    }
+  }
+
+  async deleteSession(userId: string, sessionId: number): Promise<void> {
+    const response = await fetch(`/service/users/${userId}/sessions/${sessionId}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) {
+      throw new Error('Failed to delete session');
     }
   }
 }
 
 
 export class ChatSession {
-  constructor(public id: number, public userId: string, public name: string) { }
+  constructor(public id: number, public userId: string, public model: string, public name: string) { }
 
   async listTalkingHistories(): Promise<TalkingHistory[]> {
     const response = await fetch('/service/users/' + this.userId + '/sessions/' + this.id + '/talking_histories');
@@ -51,7 +76,7 @@ export class ChatSession {
   }
 
   async addTalkingHistory(role: string, text: string): Promise<TalkingHistory[]> {
-    const response = await fetch(`/service/users/${this.userId}/sessions/${this.id}/talking_histories`, {
+    const response = await fetch(`/service/users/${this.userId}/sessions/${this.id}/talking_histories/${this.model}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
